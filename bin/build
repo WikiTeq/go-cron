@@ -1,13 +1,12 @@
 #!/bin/bash
 
-
-go get
+go get .
 
 rm -rf dist
 mkdir -p dist
 
-cd ./dist
+env GOOS=linux GOARCH=amd64 go build -o dist/go-cron.amd64 go-cron.go
+env GOOS=linux GOARCH=arm64 go build -o dist/go-cron.arm64 go-cron.go
 
-go build -o go-cron ../go-cron.go
-
-tar -cf go-cron.tar.gz go-cron
+tar -cf dist/go-cron.amd64.tar.gz dist/go-cron.amd64
+tar -cf dist/go-cron.arm64.tar.gz dist/go-cron.arm64
