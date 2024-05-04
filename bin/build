@@ -5,8 +5,11 @@ go get .
 rm -rf dist
 mkdir -p dist
 
-env GOOS=linux GOARCH=amd64 go build -o dist/go-cron.amd64 go-cron.go
-env GOOS=linux GOARCH=arm64 go build -o dist/go-cron.arm64 go-cron.go
-
-tar -cf dist/go-cron.amd64.tar.gz dist/go-cron.amd64
-tar -cf dist/go-cron.arm64.tar.gz dist/go-cron.arm64
+#x86
+env GOOS=linux GOARCH=amd64 go build -o dist/go-cron go-cron.go
+tar -cf dist/go-cron.x86_64.tar.gz -C dist go-cron
+mv dist/go-cron dist/go-cron.x86_64
+# arm
+env GOOS=linux GOARCH=arm64 go build -o dist/go-cron go-cron.go
+tar -cf dist/go-cron.aarch64.tar.gz -C dist go-cron
+mv dist/go-cron dist/go-cron.aarch64
